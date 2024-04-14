@@ -25,6 +25,7 @@ router.get('me', async ({ auth, response }) => {
   return response.ok(user)
 }).use(middleware.auth()).prefix('/api/v1/')
 
+//  Article
 router.get('article', [ArticlesController, 'getListArticle']).use(middleware.auth()).prefix('/api/v1/')
 router.post('article', [ArticlesController, 'addNewArticle']).use(middleware.auth()).prefix('/api/v1/')
 router.get('article/:id', [ArticlesController, 'findArticleById']).use(middleware.auth()).prefix('/api/v1/')

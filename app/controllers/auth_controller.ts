@@ -8,9 +8,11 @@ export default class AuthController {
         const payload = await request.validateUsing(registerValidator)
         const user = await User.create(payload)
         return response.created({
-            "status":201,
-            "message":"INSCRIPTION REUSSI",
-            "data": user
+            "status":   201,
+            "message":  "INSCRIPTION REUSSI",
+            "data": {
+                user
+            }
         })
     }
 
@@ -19,17 +21,18 @@ export default class AuthController {
 
         const user = await User.verifyCredentials(username, password)
         const token = await User.accessTokens.create(user)
-
+        
         return response.ok({
-            "status":200,
-            "message":"LOGIN SUCCESSFUL",
+            "status":   200,
+            "message":  "LOGIN SUCCESSFUL",
             "data": {
-                "token": {
+                /* "token": {
                     "type": token.type,
                     "access_token": token.value!.release(),
                     "is_expire": token.isExpired,
                     "expiration":token.expiresAt
-                },
+                }, */
+                "token": token,
                 "user_data": {
                     ...user.serialize()
                 }

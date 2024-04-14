@@ -22,7 +22,6 @@ export default class ArticlesController {
                 "message":  error
             })
         }
-        
     }
 
     public async addNewArticle({request, response}: HttpContext){
@@ -31,7 +30,7 @@ export default class ArticlesController {
         try {
             const article_payload = await request.validateUsing(createArticleValidator)
             const article = await Article.create(article_payload)
-            
+
             return response.created({
                 "status":   201,
                 "message":  "ARTICLE CREER",
@@ -45,7 +44,6 @@ export default class ArticlesController {
                 "message":  error
             })
         }
-        
     }
 
     public async findArticleById({params, response}: HttpContext){
@@ -92,11 +90,5 @@ export default class ArticlesController {
                 "message":  error
             })
         }
-        
     }
-
-
-
-
-
 }
