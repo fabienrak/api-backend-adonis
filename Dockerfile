@@ -5,15 +5,14 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-# RUN npm ci --production
-RUN npm ci
+RUN npm ci --production
+# RUN npm ci
 COPY . .
 
 # Build app prod
-# RUN npm run build --production
+RUN npm run build --production
 
-# COPY ./.env ./build
-
+COPY ./.env ./build
 EXPOSE 3333
 
 # CMD ["node", "./build/server.js"]
