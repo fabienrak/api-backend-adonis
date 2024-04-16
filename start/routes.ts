@@ -13,6 +13,7 @@ import { middleware } from './kernel.js'
 import ArticlesController from '#controllers/articles_controller'
 import AutoSwagger from "adonis-autoswagger";
 import swagger from "#config/swagger";
+import UserProfilsController from '#controllers/user_profils_controller';
 
 //  Auth
 router.group(() =>  {
@@ -30,6 +31,10 @@ router.get('article', [ArticlesController, 'getListArticle']).use(middleware.aut
 router.post('article', [ArticlesController, 'addNewArticle']).use(middleware.auth()).prefix('/api/v1/')
 router.get('article/:id', [ArticlesController, 'findArticleById']).use(middleware.auth()).prefix('/api/v1/')
 router.delete('article/:id', [ArticlesController, 'deleteArticle']).use(middleware.auth()).prefix('/api/v1/')
+
+//  user profil
+router.post('profil', [UserProfilsController, 'createProfil']).use(middleware.auth()).prefix('/api/v1/users')
+
 
 //  API DOC
 router.get("/swagger", async () => {
