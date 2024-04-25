@@ -1,4 +1,5 @@
 import Facture from '#models/facture'
+import { factureValidator } from '#validators/facture'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class FacturesController {
@@ -70,12 +71,12 @@ export default class FacturesController {
     }
 
     public async createNewFacture({ auth, request, response }:  HttpContext) {
-
+        const userProprietaire = auth.user!
         try {
-            const factureData = await request
-            const newFacture = await Facture.create(factureData)
+            const factureData = await request.all().validateUsing(factureValidator) as Partial<Facture>
+            const facture = await Facture.create(factureData)
 
-            
+
         } catch(error){
             return response.internalServerError({
                 "status":   500,

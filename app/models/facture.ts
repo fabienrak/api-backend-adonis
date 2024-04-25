@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, BelongsTo, column, hasMany, HasMany, hasOne, HasOne } from '@adonisjs/lucid/orm'
 import Service from './service.js'
 import { HttpContext } from '@adonisjs/core/http'
 import User from './user.js'
@@ -21,13 +21,22 @@ export default class Facture extends BaseModel {
   declare date_fin: string
 
   //  One to one User
+  // @column({ columnName: 'proprietaire', serializeAs: 'proprietaire' })
+  @column()
+  public proprietaireId: number
+
   // @column()
-  @hasOne(()  =>  User)
-  public proprietaire:  HasOne<typeof User>
+  @belongsTo(()  =>  User, {
+    foreignKey: proprietaireId
+  })
+  public proprietaire:  BelongsTo<typeof User>
+
+  @column()
+  public clientId: number
+
+  @belongsTo(()  =>  User)
+  declare client: BelongsTo<typeof User>
   
-  // @column()
-  @hasOne(()  =>  User)
-  declare client: HasOne<typeof User>
 
   //  One to many Service
   @hasMany(() =>  Service)
