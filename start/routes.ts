@@ -14,6 +14,7 @@ import ArticlesController from '#controllers/articles_controller'
 import AutoSwagger from "adonis-autoswagger";
 import swagger from "#config/swagger";
 import UserProfilsController from '#controllers/user_profils_controller';
+import ServicesController from '#controllers/services_controller';
 
 //  Auth
 router.group(() =>  {
@@ -35,6 +36,10 @@ router.delete('article/:id', [ArticlesController, 'deleteArticle']).use(middlewa
 //  user profil
 router.post('profil', [UserProfilsController, 'createProfil']).use(middleware.auth()).prefix('/api/v1/users')
 
+//  service
+router.get('services', [ServicesController, 'getServiceList']).use(middleware.auth()).prefix('/api/v1/')
+router.get('service/:id', [ServicesController, 'findOneService']).use(middleware.auth()).prefix('/api/v1/')
+// router.delete('service/:id', [ServicesController, 'deleteService']).use(middleware.auth()).prefix('/api/v1/')
 
 //  API DOC
 router.get("/swagger", async () => {

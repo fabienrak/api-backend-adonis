@@ -69,5 +69,18 @@ export default class FacturesController {
         }
     }
 
-    public async createNewFacture()
+    public async createNewFacture({ auth, request, response }:  HttpContext) {
+
+        try {
+            const factureData = await request
+            const newFacture = await Facture.create(factureData)
+
+            
+        } catch(error){
+            return response.internalServerError({
+                "status":   500,
+                "message":  error
+            })
+        }
+    }
 }
