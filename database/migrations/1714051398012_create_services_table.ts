@@ -11,7 +11,6 @@ export default class extends BaseSchema {
       table.string('prix_base')
       table.string('status')
     
-
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
