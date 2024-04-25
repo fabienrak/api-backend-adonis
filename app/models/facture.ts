@@ -8,7 +8,7 @@ export default class Facture extends BaseModel {
 
   @column()
   declare ref_facture: string
-  //  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
+  
   @column()
   declare status: string
 
