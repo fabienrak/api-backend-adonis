@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, HasMany } from '@adonisjs/lucid/orm'
+import Service from './service.js'
 
 export default class Facture extends BaseModel {
   @column({ isPrimary: true })
@@ -25,8 +26,8 @@ export default class Facture extends BaseModel {
   declare client: number
 
   //  One to many Service
-  @column()
-  declare service: number
+  @hasMany(() =>  Service)
+  public service: HasMany<typeof Service>
 
   @column()
   declare quantite: number
