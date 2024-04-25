@@ -2,6 +2,9 @@ import Service from '#models/service'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ServicesController {
+    
+    //  TODO :  Create Service for more reusable code   -   fabienrak
+
 
     public async getServiceList({ response }: HttpContext){
         try {

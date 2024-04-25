@@ -2,6 +2,8 @@ import Facture from '#models/facture'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class FacturesController {
+    
+    //  TODO :  Create Service for more reusable code   -   fabienrak
 
     public async getFactureList({ response }: HttpContext){
         try {
@@ -66,4 +68,6 @@ export default class FacturesController {
             })
         }
     }
+
+    public async createNewFacture()
 }

@@ -6,6 +6,7 @@ import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import UserProfile from './profil.js'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
+import { HttpContext } from '@adonisjs/core/http'
 
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -40,6 +41,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
     prefix: crypto.randomUUID(),
     tokenSecretLength:  250
   })
+
+
 
   /* @beforeSave()
   public static async hashPassword(user:  User){

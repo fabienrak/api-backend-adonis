@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, HasMany, hasOne, HasOne } from '@adonisjs/lucid/orm'
 import Service from './service.js'
+import { HttpContext } from '@adonisjs/core/http'
+import User from './user.js'
 
 export default class Facture extends BaseModel {
   @column({ isPrimary: true })
@@ -19,11 +21,13 @@ export default class Facture extends BaseModel {
   declare date_fin: string
 
   //  One to one User
-  @column()
-  declare proprietaire: number
+  // @column()
+  @hasOne(()  =>  User)
+  public proprietaire:  HasOne<typeof User>
   
-  @column()
-  declare client: number
+  // @column()
+  @hasOne(()  =>  User)
+  declare client: HasOne<typeof User>
 
   //  One to many Service
   @hasMany(() =>  Service)
@@ -49,4 +53,6 @@ export default class Facture extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+
 }
